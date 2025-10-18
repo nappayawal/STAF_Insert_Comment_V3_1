@@ -1,0 +1,59 @@
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+*.log
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# === PyCharm / JetBrains ===
+.idea/
+*.iml
+
+# === Build artifacts ===
+build/
+dist/
+*.egg-info/
+*.spec
+
+# === Excel files & temp outputs ===
+*.xlsx
+*.xlsm
+*.xls
+*.csv
+*.json
+*.tmp
+~$*
+
+# === OS specific ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Debug / test outputs ===
+comment_dict_debug.json
+metric_dict_debug.json
+inserted_comments.json
+skipped_comments.json
+*.bak
+*.old
+
+# === pyinstaller outputs ===
+*.exe
+*.manifest
+*.dll
+*.pkg
+*.zip
+*.tar
+*.gz
+
+# === Logs and cache ===
+*.log
+.cache/
+logs/
