@@ -88,8 +88,8 @@ def extract_daily_metrics(target_wb, ship_code: str, machine_count: int, log_cal
         for c in range(1, sheet.max_column + 1):
             value = sheet.cell(row=r, column=c).value
             if value:
-                text = str(value).replace("\\n", " ").strip().upper()
-                text = re.sub(r"\\s+", " ", text)
+                text = str(value).replace("\n", " ").strip().upper()
+                text = re.sub(r"\s+", " ", text)
                 if "DAILY COIN IN" in text:
                     coin_in_col = c
                     header_row = r
@@ -119,7 +119,7 @@ def extract_daily_metrics(target_wb, ship_code: str, machine_count: int, log_cal
     return coin_dict, netwin_dict
 
 def get_merged_range_bounds(sheet, row, col):
-    \"\"\"Return (min_row, min_col, max_row, max_col) if inside a merged range; else None.\"\"\"
+    """Return (min_row, min_col, max_row, max_col) if inside a merged range; else None."""
     for merged_range in sheet.merged_cells.ranges:
         min_col, min_row, max_col, max_row = range_boundaries(str(merged_range))
         if min_row <= row <= max_row and min_col <= col <= max_col:
@@ -127,7 +127,7 @@ def get_merged_range_bounds(sheet, row, col):
     return None
 
 def get_value_merge_safe(sheet, row, col):
-    \"\"\"Return anchor value if cell is merged; else the cell's own value.\"\"\"
+    """Return anchor value if cell is merged; else the cell's own value."""
     for merged_range in sheet.merged_cells.ranges:
         min_col, min_row, max_col, max_row = range_boundaries(str(merged_range))
         if min_row <= row <= max_row and min_col <= col <= max_col:
@@ -135,7 +135,7 @@ def get_value_merge_safe(sheet, row, col):
     return sheet.cell(row=row, column=col).value
 
 def jump_over_merged(sheet, row, col, dr, dc):
-    \"\"\"Move in (dr, dc), skipping across current merged block.\"\"\"
+    """Move in (dr, dc), skipping across current merged block."""
     bounds = get_merged_range_bounds(sheet, row, col)
     if bounds:
         min_row, min_col, max_row, max_col = bounds
@@ -152,7 +152,7 @@ def jump_over_merged(sheet, row, col, dr, dc):
         return row + dr, col + dc
 
 def has_surrounding_position_number(sheet, row, col, expected_number: int) -> bool:
-    \"\"\"Check 8 neighbors (merge-safe) for an integer equal to expected_number.\"\"\"
+    """Check 8 neighbors (merge-safe) for an integer equal to expected_number."""
     bounds = get_merged_range_bounds(sheet, row, col)
     if bounds:
         min_row, min_col, max_row, max_col = bounds
@@ -177,7 +177,7 @@ def has_surrounding_position_number(sheet, row, col, expected_number: int) -> bo
     return False
 
 def detect_active_metric(floor_sheet, coin_dict, netwin_dict, log_callback=None) -> str:
-    \"\"\"Return 'coin_in' or 'net_win' after tallying hits in floor values.\"\"\"
+    """Return 'coin_in' or 'net_win' after tallying hits in floor values."""
     coin_hits = 0
     net_hits = 0
 
